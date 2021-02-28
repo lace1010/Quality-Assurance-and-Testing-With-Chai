@@ -54,12 +54,12 @@ suite("Unit Tests", function () {
     });
     // #7
     test("#deepEqual, #notDeepEqual", function () {
-      assert.fail(
+      assert.deepEqual(
         { a: "1", b: 5 },
         { b: 5, a: "1" },
         "keys order doesn't matter"
       );
-      assert.fail(
+      assert.notDeepEqual(
         { a: [5, 6] },
         { a: [6, 5] },
         "array elements position does matter !!"
