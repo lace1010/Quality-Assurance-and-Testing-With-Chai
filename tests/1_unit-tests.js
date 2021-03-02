@@ -2,6 +2,7 @@ const chai = require("chai");
 const assert = chai.assert;
 
 suite("Unit Tests", function () {
+  // notes for each test are in the messages
   suite("Basic Assertions", function () {
     // #1
     test("#isNull, #isNotNull", function () {
@@ -34,7 +35,7 @@ suite("Unit Tests", function () {
   // -----------------------------------------------------------------------------
 
   suite("Equality", function () {
-    // #5
+    // #5 .equal() compares objects using '=='
     test("#equal, #notEqual", function () {
       assert.equal(12, "12", "numbers are coerced into strings with == ");
       assert.notEqual(
@@ -45,14 +46,14 @@ suite("Unit Tests", function () {
       assert.equal(6 * "2", "12", "no more hints...");
       assert.notEqual(6 + "2", "12", "type your error message if you want");
     });
-    // #6
+    // #6 .strictEqual() compares objects using '==='
     test("#strictEqual, #notStrictEqual", function () {
       assert.notStrictEqual(6, "6");
       assert.strictEqual(6, 3 * 2);
       assert.strictEqual(6 * "2", 12);
       assert.notStrictEqual([1, "a", {}], [1, "a", {}]);
     });
-    // #7
+    // #7 .deepEqual() tests if two objects, and their child objects, are equal, using the == operator.
     test("#deepEqual, #notDeepEqual", function () {
       assert.deepEqual(
         { a: "1", b: 5 },
@@ -74,21 +75,22 @@ suite("Unit Tests", function () {
   }
 
   suite("Comparisons", function () {
-    // #8
+    // #8  .isAbove() => a > b , .isAtMost() => a <= b
     test("#isAbove, #isAtMost", function () {
       assert.isAtMost("hello".length, 5);
       assert.isAbove(1, 0);
       assert.isAbove(Math.PI, 3);
       assert.isAtMost(1 - Math.random(), 1);
     });
-    // #9
+    // #9 .isBelow() => a < b , .isAtLeast =>  a >= b
     test("#isBelow, #isAtLeast", function () {
       assert.isAtLeast("world".length, 5);
       assert.isAtLeast(2 * Math.random(), 0);
       assert.isBelow(5 % 2, 2);
       assert.isBelow(2 / 3, 1);
     });
-    // #10
+    // #10 syntax => .approximately(actual, expected, range, [message])
+    // actual = expected +/- range
     test("#approximately", function () {
       assert.approximately(weirdNumbers(0.5), 1, 0.5);
       assert.approximately(weirdNumbers(0.2), 1, 0.8);
@@ -102,16 +104,16 @@ suite("Unit Tests", function () {
   suite("Arrays", function () {
     // #11
     test("#isArray, #isNotArray", function () {
-      assert.fail(
+      assert.isArray(
         "isThisAnArray?".split(""),
         "String.prototype.split() returns an Array"
       );
-      assert.fail([1, 2, 3].indexOf(2), "indexOf returns a number.");
+      assert.isNotArray([1, 2, 3].indexOf(2), "indexOf returns a number.");
     });
     // #12
     test("Array #include, #notInclude", function () {
-      assert.fail(winterMonths, "jul", "It's summer in july...");
-      assert.fail(
+      assert.notInclude(winterMonths, "jul", "It's summer in july...");
+      assert.include(
         backendLanguages,
         "javascript",
         "JS is a backend language !!"
