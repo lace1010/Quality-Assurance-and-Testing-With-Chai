@@ -61,16 +61,18 @@ suite("Functional Tests", function () {
   });
 });
 
+// Import zombie and check browser site before testing
 const Browser = require("zombie");
 Browser.site = "https://quality-assurance-test-chai.herokuapp.com";
 
 suite("Functional Tests with Zombie.js", function () {
+  // Setup hook
   const browser = new Browser();
   suiteSetup(function (done) {
     return browser.visit("/", done);
   });
   suite('"Famous Italian Explorers" form', function () {
-    // #5
+    // #5 Test if Colombo names are correct and date element is there.
     test('submit "surname" : "Colombo" - write your e2e test...', function (done) {
       browser.fill("surname", "Colombo").pressButton("submit", function () {
         browser.assert.success();
@@ -80,7 +82,7 @@ suite("Functional Tests with Zombie.js", function () {
         done();
       });
     });
-    // #6
+    // #6 Test if Vespucci names are correct and date element is there.
     test('submit "surname" : "Vespucci" - write your e2e test...', function (done) {
       browser.fill("surname", "Vespucci").pressButton("submit", () => {
         browser.assert.success();
@@ -88,7 +90,6 @@ suite("Functional Tests with Zombie.js", function () {
         browser.assert.text("span#surname", "Vespucci");
         browser.assert.element("span#dates", 1);
       });
-
       done();
     });
   });
