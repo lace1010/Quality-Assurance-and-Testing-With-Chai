@@ -63,8 +63,8 @@ suite("Functional Tests", function () {
 
 const Browser = require("zombie");
 
-Browser.localhost("example.com", process.env.PORT || 3000);
-// Browser.site = "https://quality-assurance-test-chai.herokuapp.com";
+// Browser.localhost("example.com", process.env.PORT || 3000);
+Browser.site = "https://quality-assurance-test-chai.herokuapp.com";
 
 suite("Functional Tests with Zombie.js", function () {
   const browser = new Browser();
