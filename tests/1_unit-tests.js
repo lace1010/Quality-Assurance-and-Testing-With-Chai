@@ -110,7 +110,7 @@ suite("Unit Tests", function () {
       );
       assert.isNotArray([1, 2, 3].indexOf(2), "indexOf returns a number.");
     });
-    // #12
+    // #12 first paramter is array, second is the item we want to if it includes or does not include
     test("Array #include, #notInclude", function () {
       assert.notInclude(winterMonths, "jul", "It's summer in july...");
       assert.include(
@@ -129,11 +129,11 @@ suite("Unit Tests", function () {
   suite("Strings", function () {
     // #13
     test("#isString, #isNotString", function () {
-      assert.fail(Math.sin(Math.PI / 4), "a float is not a string");
-      assert.fail(process.env.PATH, "env vars are strings (or undefined)");
-      assert.fail(JSON.stringify({ type: "object" }), "a JSON is a string");
+      assert.isNotString(Math.sin(Math.PI / 4), "a float is not a string");
+      assert.isString(process.env.PATH, "env vars are strings (or undefined)");
+      assert.isString(JSON.stringify({ type: "object" }), "a JSON is a string");
     });
-    // #14
+    // #14 Same as array include. first paramter is string second is the item we are checking to see if it is or is not in string
     test("String #include, #notInclude", function () {
       assert.fail("Arrow", "row", "Arrow contains row...");
       assert.fail("dart", "queue", "But a dart doesn't contain a queue");
@@ -141,8 +141,8 @@ suite("Unit Tests", function () {
     // #15
     test("#match, #notMatch", function () {
       const regex = /^#\sname\:\s[\w\s]+,\sage\:\s\d+\s?$/;
-      assert.fail(formatPeople("John Doe", 35), regex);
-      assert.fail(formatPeople("Paul Smith III", "twenty-four"), regex);
+      assert.match(formatPeople("John Doe", 35), regex);
+      assert.notMatch(formatPeople("Paul Smith III", "twenty-four"), regex);
     });
   });
 
