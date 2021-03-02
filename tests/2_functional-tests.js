@@ -62,8 +62,6 @@ suite("Functional Tests", function () {
 });
 
 const Browser = require("zombie");
-
-// Browser.localhost("example.com", process.env.PORT || 3000);
 Browser.site = "https://quality-assurance-test-chai.herokuapp.com";
 
 suite("Functional Tests with Zombie.js", function () {
@@ -75,14 +73,21 @@ suite("Functional Tests with Zombie.js", function () {
     // #5
     test('submit "surname" : "Colombo" - write your e2e test...', function (done) {
       browser.fill("surname", "Colombo").pressButton("submit", function () {
-        assert.fail();
-
+        browser.assert.success();
+        browser.assert.text("span#name", "Cristoforo");
+        browser.assert.text("span#surname", "Colombo");
+        browser.assert.element("span#dates", 1);
         done();
       });
     });
     // #6
     test('submit "surname" : "Vespucci" - write your e2e test...', function (done) {
-      assert.fail();
+      browser.fill("surname", "Vespucci").pressButton("submit", () => {
+        browser.assert.success();
+        browser.assert.text("span#name", "Amerigo");
+        browser.assert.text("span#surname", "Vespucci");
+        browser.assert.element("span#dates", 1);
+      });
 
       done();
     });
